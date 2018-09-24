@@ -1,1 +1,1 @@
-web: gunicorn manage:flaskr
+web: flask run
