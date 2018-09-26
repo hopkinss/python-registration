@@ -10,7 +10,6 @@
   <h1>Seattle Genetics Intro to Python</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}"  class="btn btn-primary">Log Out</a>&nbsp;
     {% else %}
       <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register</a>&nbsp;&nbsp;
@@ -27,3 +26,6 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+<footer class="center-div" >
+    <a href="http://sgcpapp1/infra/python/"><i style="color: #339966;" class="fa fa-university" aria-hidden="true">&nbsp;Course notes</i></a>
+</footer>

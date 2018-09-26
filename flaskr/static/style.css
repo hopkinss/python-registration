@@ -175,3 +175,19 @@ input.danger {
     margin-right: auto;
     margin-top: 10px;
 }
+
+.footerWrap {
+    width:100%;
+    position:fixed;
+    bottom: 0px;
+}
+.footer {
+    width:400px;
+    margin:auto;
+}
+.footerContent {
+    float:left;
+    width:100%;
+    padding:20px 0;
+}
+.footer a,i {float:left; width:100%; text-align:center; }

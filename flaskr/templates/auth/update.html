@@ -13,11 +13,16 @@
 
     <label for="email">Email</label>
     <input name="email" id="email" value="{{ student['email'] }}" required>
-
-    <input type="submit" value="Save">
+     <div class="center-div">
+        <input type="submit" class="btn btn-primary" style="width: 100px;" value="Save">
+     </div>
   </form>
   <hr>
-  <form action="{{ url_for('auth.delete', id=student['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-  </form>
+
+      <form action="{{ url_for('auth.delete', id=student['id']) }}" method="post">
+          <div class="center-div">
+        <input class="btn btn-danger" style="width: 100px;" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+                  </div>
+      </form>
+
 {% endblock %}
