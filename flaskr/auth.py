@@ -1,4 +1,6 @@
 import functools
+from flaskr.mailer import Mail
+
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -156,3 +158,40 @@ def delete(id):
     db.execute('DELETE FROM user WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('auth.index'))
+
+@bp.route('/notify', methods=('GET', 'POST'))
+def notify():
+    db = get_db()
+    if request.method == 'POST':
+
+        to_list = []
+        db = get_db()
+        user_id = session.get('user_id')
+
+        from_line = 'python@seagen.com'
+
+        if user_id != None:
+            from_line = db.execute('SELECT email FROM user WHERE id = ?', (user_id,)).fetchone()['email']
+
+        emails = db.execute('SELECT email FROM user').fetchall()
+        loc = request.form['class_location']
+        dat = request.form['class_date']
+        msg = request.form['class_details']
+        lnk = request.form['class_link']
+
+
+        for i in emails:
+            to_list.append(i['email'])
+
+        mail  = Mail(to_list,from_line,loc,dat,msg,lnk)
+
+        try:
+            mail.send_mail()
+        except Exception as e:
+            flash(from_line,user_id)
+
+        flash(u"message sent")
+        return render_template('auth/notify.html')
+
+    else:
+        return render_template('auth/notify.html')

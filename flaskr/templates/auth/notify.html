@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h4>{% block title %}Recipients{% endblock %}</h4>
+
+{% endblock %}
+
+{% block content %}
+    <form class = "form" method="post">
+    <article>
+
+    <div class="container" >
+        <h4>Message details</h4><hr/>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <label for="class_location">Location:</label>
+            </div>
+
+            <div class="col-sm-6">
+                <input type="text" id="class_location" style="width: 300px;" name="class_location">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <label for="class_date">Date/Time:</label>
+            </div>
+            <div class="col-sm-6">
+                <input type="date" name="class_date" id="class_date">
+                <input type="time" name="class_time">
+            </div>
+        </div>
+        <h5>Message content</h5>
+        <div class="row">
+
+            <textarea rows="3" cols="100" name="class_details"></textarea>
+        </div>
+        <div class="row" style="padding-top: 5px;">
+            <div class="col-sm-12" >
+                <label for="class_link">Link:</label>
+                <input type="text"  style="width: 75%;color:blue;" id="class_link" name="class_link">">
+            </div>
+        </div>
+    </div>
+        <input type="submit" value="Post" class="btn btn-success" style="width: 100px;">
+    </article>
+    </form>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var $selectAll = $('#selectAll'); // main checkbox inside table thead
+            var $table = $('.table'); // table selector
+            var $tdCheckbox = $table.find('tbody input:checkbox'); // checboxes inside table body
+            var $tdCheckboxChecked = []; // checked checbox arr
+
+            //Select or deselect all checkboxes on main checkbox change
+            $selectAll.on('click', function () {
+                $tdCheckbox.prop('checked', this.checked);
+            });
+
+            //Switch main checkbox state to checked when all checkboxes inside tbody tag is checked
+            $tdCheckbox.on('change', function(){
+                $tdCheckboxChecked = $table.find('tbody input:checkbox:checked');//Collect all checked checkboxes from tbody tag
+            //if length of already checked checkboxes inside tbody tag is the same as all tbody checkboxes length, then set property of main checkbox to "true", else set to "false"
+                $selectAll.prop('checked', ($tdCheckboxChecked.length == $tdCheckbox.length));
+            })
+        });
+
+    </script>
+{% endblock %}
